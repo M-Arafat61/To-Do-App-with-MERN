@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-.input {
-  @apply w-full h-[52px] rounded-lg pl-6;
+@layer base {
+  .input {
+    @apply w-full h-[52px] rounded-lg pl-6;
+  }
+  .input,
+  .textarea {
+    @apply bg-transparent outline-none focus:ring-1 focus:ring-accent border border-white/20 placeholder:text-white/30 placeholder:font-light;
+  }
+  .textarea {
+    @apply w-full h-[180px] pl-6 capitalize rounded-lg resize-none;
+  }
 }
