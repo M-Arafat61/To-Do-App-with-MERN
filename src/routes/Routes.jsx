@@ -2,9 +2,10 @@ import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../layout/MainLayout";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
-import TaskManagement from "../pages/TaskManagement/TaskManagement";
 import Register from "../pages/Register/Register";
 import PrivateRoute from "./PrivateRoute";
+
+import Dashboard from "../components/Dashboard/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -16,14 +17,6 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "task-management",
-        element: (
-          <PrivateRoute>
-            <TaskManagement />
-          </PrivateRoute>
-        ),
-      },
-      {
         path: "login",
         element: <Login />,
       },
@@ -32,6 +25,15 @@ const router = createBrowserRouter([
         element: <Register />,
       },
     ],
+  },
+
+  {
+    path: "dashboard/task-management",
+    element: (
+      <PrivateRoute>
+        <Dashboard />
+      </PrivateRoute>
+    ),
   },
 ]);
 

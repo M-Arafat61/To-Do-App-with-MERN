@@ -28,7 +28,7 @@ const Nav = () => {
         </NavLink>
       </div>
       <div className=''>
-        <NavLink to='/task-management'>Task Management</NavLink>
+        <NavLink to='/dashboard/task-management'>Dashboard</NavLink>
       </div>
       {user ? (
         <div className=''>
@@ -81,32 +81,9 @@ const Nav = () => {
         </div>
         <div className='navbar-end hidden md:flex'>
           <div className='dropdown dropdown-end'>
-            {user?.photoURL ? (
-              <div
-                tabIndex={0}
-                role='button'
-                className='btn btn-ghost btn-circle avatar'
-              >
-                <div className='w-10 rounded-full'>
-                  <img src={user?.photoURL} alt='' />
-                </div>
-              </div>
-            ) : (
-              <button>
-                <IoPersonCircleOutline className='text-3xl' />
-              </button>
-            )}
-            <ul
-              tabIndex={0}
-              className='menu menu-sm items-end dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-36 text-lg hover:bg-white/40'
-            >
-              {user && (
-                <>
-                  <li className='mb-2'>{user?.displayName}</li>
-                  <li className='mb-2'>{user?.email}</li>
-                </>
-              )}
-            </ul>
+            <button className='cursor-not-allowed'>
+              <IoPersonCircleOutline className='text-3xl' />
+            </button>
           </div>
         </div>
       </div>

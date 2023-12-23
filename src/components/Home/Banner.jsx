@@ -10,7 +10,7 @@ const Banner = () => {
         <div className='relative items-center flex mx-auto w-full md:w-3/4 rounded-xl overflow-hidden'>
           <img src={banner} alt='' />
           <Link
-            to='/task-management'
+            to='/dashboard/task-management'
             className='font-bold text-base md:text-xl bg-blue-500 btn-outline rounded-full px-3 md:px-10 py-1 md:py-4 absolute  text-white'
           >
             Let's Explore!

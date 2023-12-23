@@ -8,7 +8,7 @@ const Completed = ({ tasks, handleTaskDelete }) => {
     <Droppable droppableId='completed'>
       {provided => (
         <div {...provided.droppableProps} ref={provided.innerRef}>
-          <p className='flex items-center gap-x-2 px-5 py-2 text-xl bg-blue-500 text-white font-medium mb-5'>
+          <p className='flex items-center gap-x-2 px-5 py-2 text-xl bg-blue-500/30 text-white/80  font-medium mb-5'>
             <IoIosCloudDone />
             Completed
           </p>

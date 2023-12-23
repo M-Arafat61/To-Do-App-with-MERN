@@ -1,18 +1,10 @@
 import Container from "./Container";
-import logo from "/logo-todo.png";
 const Footer = () => {
   return (
     <Container>
-      <div className='flex flex-col justify-around items-start gap-5 md:flex-row'>
-        <div className='space-y-1'>
-          <img className='w-24 md:w-36' src={logo} alt='' />
-        </div>
-        <div className='space-y-3 mb-5'>
-          <div>
-            <p className='text-2xl font-bold'>To Do</p>
-            <p>3/A,home-in-sky, Gulshan, Dhaka</p>
-            <p>Phone +88-2564-8565</p>
-          </div>
+      <hr className='my-5  mx-auto border-1 border-gray-600' />
+      <div className='flex flex-col justify-around items-center gap-5 md:flex-row mt-10 md:mt-24'>
+        <div className='space-y-3'>
           <div className='flex gap-5'>
             <a>
               <svg
@@ -49,10 +41,10 @@ const Footer = () => {
             </a>
           </div>
         </div>
+        <p className='md:text-center text-lg text-white tracking-wider'>
+          @All right reserved-2023
+        </p>
       </div>
-      <p className='md:text-center text-lg text-white tracking-wider'>
-        @All right reserved-2023
-      </p>
     </Container>
   );
 };

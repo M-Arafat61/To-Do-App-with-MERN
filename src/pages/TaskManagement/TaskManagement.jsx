@@ -10,14 +10,12 @@ import { useState } from "react";
 import Todo from "../../components/TaskManagement/Todo";
 import OnGoing from "../../components/TaskManagement/OnGoing";
 import Completed from "../../components/TaskManagement/Completed";
-import useAuth from "../../hooks/useAuth";
 
 const TaskManagement = () => {
   const { register, handleSubmit, reset } = useForm();
   const [showForm, setShowForm] = useState(false);
   const [tasks, setTasks] = useState([]);
   const axiosSecure = useAxiosSecure();
-  const { user } = useAuth();
 
   const { data: addedTasks = [], refetch } = useQuery({
     queryKey: ["tasks"],
@@ -27,14 +25,6 @@ const TaskManagement = () => {
       return res.data;
     },
   });
-
-  const timeStamp = user?.reloadUserInfo?.createdAt;
-  let formattedDate = "Invalid Date";
-
-  if (timeStamp && !isNaN(timeStamp)) {
-    const date = new Date(parseInt(timeStamp, 10));
-    formattedDate = date.toLocaleString();
-  }
 
   console.log(addedTasks);
   const onSubmit = async data => {
@@ -141,102 +131,73 @@ const TaskManagement = () => {
 
   return (
     <Container>
-      <h2 className='text-3xl text-center text-white my-10 md:my-24'>
-        Create and Manage Tasks.
-      </h2>
       <DragDropContext onDragEnd={onDragEnd}>
-        <div className='my-10 md:my-24'>
-          {user && (
-            <div className='flex items-center justify-around gap-x-10'>
-              <div className='flex flex-1 items-center justify-center'>
-                <img className='w-1/2 rounded-box' src={user.photoURL} alt='' />
-              </div>
-              <div className='flex-1'>
-                <hr className='my-5  mx-auto border-1 border-gray-600' />
-                <div className='flex items-center gap-x-2'>
-                  <p>Name-</p>
-                  <h3>{user.displayName}</h3>
-                </div>
-                <div className='flex items-center gap-x-2'>
-                  <p>Email-</p>
-                  <h3>{user.email}</h3>
-                </div>
-                <div className='flex gap-x-2'>
-                  <p>Account Creation Time-</p>
-                  <h3>{formattedDate}</h3>
-                </div>
-                <hr className='my-5  mx-auto border-1 border-gray-600' />
-              </div>
-            </div>
+        <div className='flex justify-center md:mt-5'>
+          {!showForm && (
+            <button
+              className='flex items-center gap-x-2 px-5 py-2 text-xl bg-blue-500/30 text-white/80 font-medium'
+              onClick={() => setShowForm(true)}
+            >
+              New Task
+              <MdAddCard className='text-2xl' />
+            </button>
           )}
         </div>
-        <div className=''>
-          <div className='flex justify-center'>
-            {!showForm && (
-              <button
-                className='flex items-center gap-x-2 px-5 py-2 text-xl bg-blue-500 text-white font-medium'
-                onClick={() => setShowForm(true)}
-              >
-                New Task
-                <MdAddCard className='text-2xl' />
-              </button>
-            )}
-          </div>
-          <div className='w-3/4 mx-auto flex flex-col items-center'>
-            {showForm && (
-              <form
-                onSubmit={handleSubmit(onSubmit)}
-                className='space-y-2  w-full'
-              >
-                <div className=''>
-                  <input
-                    {...register("title", { required: true })}
-                    placeholder='Title'
-                    className='w-full rounded-md px-3 py-2  focus:outline-none'
-                  />
-                </div>
-                <textarea
-                  {...register("description", { required: true })}
-                  placeholder='Description'
+        <div className='w-3/4 mx-auto flex flex-col items-center'>
+          {showForm && (
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className='space-y-2  w-full'
+            >
+              <div className=''>
+                <input
+                  {...register("title", { required: true })}
+                  placeholder='Title'
                   className='w-full rounded-md px-3 py-2  focus:outline-none'
                 />
-                <div className='flex gap-x-5'>
-                  <select
-                    {...register("priority", { required: true })}
-                    className='rounded-md px-3 py-2 focus:outline-none '
-                  >
-                    {priorityOptions.map((option, index) => (
-                      <option key={index} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
-                  <input
-                    {...register("deadline", { required: true })}
-                    type='date'
-                    className='rounded-md px-3 py-2 focus:outline-none '
-                  />
-                </div>
+              </div>
+              <textarea
+                {...register("description", { required: true })}
+                placeholder='Description'
+                className='w-full rounded-md px-3 py-2  focus:outline-none'
+              />
+              <div className='flex gap-x-5'>
+                <select
+                  {...register("priority", { required: true })}
+                  className='rounded-md px-3 py-2 focus:outline-none '
+                >
+                  {priorityOptions.map((option, index) => (
+                    <option key={index} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+                <input
+                  {...register("deadline", { required: true })}
+                  type='date'
+                  className='rounded-md px-3 py-2 focus:outline-none '
+                />
+              </div>
 
-                <div className='flex gap-x-2 my-5'>
-                  <button
-                    onClick={() => setShowForm(false)}
-                    className='w-full bg-yellow-500 text-white font-semibold px-5 rounded-full'
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type='submit'
-                    className='w-full bg-gradient-to-l from-cyan-600 to-blue-600 px-5 rounded-full text-white font-semibold'
-                  >
-                    Add Task
-                  </button>
-                </div>
-              </form>
-            )}
-          </div>
+              <div className='flex gap-x-5'>
+                <button
+                  onClick={() => setShowForm(false)}
+                  className='w-full bg-white/60 text-black font-semibold px-5 py-1 rounded-full'
+                >
+                  Cancel
+                </button>
+                <button
+                  type='submit'
+                  className='w-full bg-gradient-to-l from-cyan-600/20 to-blue-600/30 py-1 px-5 rounded-full text-white font-semibold'
+                >
+                  Add Task
+                </button>
+              </div>
+            </form>
+          )}
         </div>
-        <div className='grid grid-cols-1 md:grid-cols-3 my-10 md:mt-24 px-2 gap-5 overflow-hidden'>
+
+        <div className='grid grid-cols-1 md:grid-cols-3 my-10 px-2 gap-5 overflow-hidden'>
           <div className=''>
             <Todo tasks={tasks} handleTaskDelete={handleTaskDelete} />
           </div>
@@ -248,7 +209,6 @@ const TaskManagement = () => {
           </div>
         </div>
       </DragDropContext>
-      <hr className='my-5  mx-auto border-1 border-gray-600' />
     </Container>
   );
 };
