@@ -1,9 +1,27 @@
+/* eslint-disable react/prop-types */
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import { LuListTodo } from "react-icons/lu";
 import { RiChatDeleteLine } from "react-icons/ri";
+import { FaRegEdit } from "react-icons/fa";
+import UpdateTask from "./UpdateTask";
+import { useState } from "react";
 
-// eslint-disable-next-line react/prop-types
-const Todo = ({ tasks, handleTaskDelete }) => {
+const Todo = ({
+  updateFormOpen,
+  setUpdateFormOpen,
+  tasks,
+  handleTaskDelete,
+  handleEditTask,
+  showUpdate,
+  setShowUpdate,
+  handleTaskUpdate,
+}) => {
+  const [taskIdBeingEdited, setTaskIdBeingEdited] = useState("");
+  const handleEditClick = taskId => {
+    setUpdateFormOpen(true);
+    setTaskIdBeingEdited(taskId);
+    handleEditTask(taskId);
+  };
   return (
     <Droppable droppableId='to-do'>
       {provided => (
@@ -13,25 +31,44 @@ const Todo = ({ tasks, handleTaskDelete }) => {
             To Do
           </p>
           {tasks
-            // eslint-disable-next-line react/prop-types
             .filter(task => task.status === "to-do")
             .map((task, index) => (
               <Draggable key={task._id} draggableId={task._id} index={index}>
                 {provided => (
                   <div
-                    className='border border-blue-500 mb-2 rounded-2xl overflow-hidden px-3 py-2'
+                    className='border border-blue-500 mb-2 rounded-2xl overflow-hidden px-3 py-2 space-y-2'
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                     ref={provided.innerRef}
                   >
-                    <h3 className='text-lg text-white'>{task.title}</h3>
-                    <p className='text-xs'>{task.description}</p>
-                    <div className='flex justify-between items-center'>
-                      <p className='text-xs'>{task.deadline}</p>
-                      <button onClick={() => handleTaskDelete(task._id)}>
-                        <RiChatDeleteLine />
-                      </button>
-                    </div>
+                    {
+                      <>
+                        <h3 className='text-lg text-white'>{task.title}</h3>
+                        <p className='text-xs text-white/80'>{task.deadline}</p>
+                        <p className='text-sm text-white/70'>
+                          {task.description}
+                        </p>
+                        <p className='text-sm text-white/70'>{task.status}</p>
+
+                        <div className='flex items-center justify-end gap-x-5 text-xl'>
+                          <button onClick={() => handleEditClick(task._id)}>
+                            <FaRegEdit className='text-emerald-600' />
+                          </button>
+                          <button onClick={() => handleTaskDelete(task._id)}>
+                            <RiChatDeleteLine className='text-red-600' />
+                          </button>
+                        </div>
+                      </>
+                    }
+                    <UpdateTask
+                      updateFormOpen={updateFormOpen}
+                      setUpdateFormOpen={setUpdateFormOpen}
+                      task={task}
+                      taskIdBeingEdited={taskIdBeingEdited}
+                      showUpdate={showUpdate}
+                      setShowUpdate={setShowUpdate}
+                      handleTaskUpdate={handleTaskUpdate}
+                    />
                   </div>
                 )}
               </Draggable>

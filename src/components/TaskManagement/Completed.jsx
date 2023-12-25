@@ -1,9 +1,28 @@
+/* eslint-disable react/prop-types */
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import { IoIosCloudDone } from "react-icons/io";
 import { RiChatDeleteLine } from "react-icons/ri";
+import { FaRegEdit } from "react-icons/fa";
+import UpdateTask from "./UpdateTask";
+import { useState } from "react";
 
-// eslint-disable-next-line react/prop-types
-const Completed = ({ tasks, handleTaskDelete }) => {
+const Completed = ({
+  updateFormOpen,
+  setUpdateFormOpen,
+  tasks,
+  handleTaskDelete,
+  handleEditTask,
+  showUpdate,
+  setShowUpdate,
+  handleTaskUpdate,
+}) => {
+  const [taskIdBeingEdited, setTaskIdBeingEdited] = useState("");
+
+  const handleEditClick = taskId => {
+    setUpdateFormOpen(true);
+    setTaskIdBeingEdited(taskId);
+    handleEditTask(taskId);
+  };
   return (
     <Droppable droppableId='completed'>
       {provided => (
@@ -14,7 +33,6 @@ const Completed = ({ tasks, handleTaskDelete }) => {
           </p>
 
           {tasks
-            // eslint-disable-next-line react/prop-types
             .filter(task => task.status === "completed")
             .map((task, index) => (
               <Draggable key={task._id} draggableId={task._id} index={index}>
@@ -27,12 +45,24 @@ const Completed = ({ tasks, handleTaskDelete }) => {
                   >
                     <h3 className='text-lg text-white'>{task.title}</h3>
                     <p className='text-xs'>{task.description}</p>
-                    <div className='flex justify-between items-center'>
-                      <p className='text-xs'>{task.deadline}</p>
+                    <p className='text-xs'>{task.deadline}</p>
+                    <div className='flex items-center justify-end gap-x-5 text-xl'>
+                      <button onClick={() => handleEditClick(task._id)}>
+                        <FaRegEdit className='text-emerald-600' />
+                      </button>
                       <button onClick={() => handleTaskDelete(task._id)}>
-                        <RiChatDeleteLine />
+                        <RiChatDeleteLine className='text-red-600' />
                       </button>
                     </div>
+                    <UpdateTask
+                      updateFormOpen={updateFormOpen}
+                      setUpdateFormOpen={setUpdateFormOpen}
+                      task={task}
+                      taskIdBeingEdited={taskIdBeingEdited}
+                      showUpdate={showUpdate}
+                      setShowUpdate={setShowUpdate}
+                      handleTaskUpdate={handleTaskUpdate}
+                    />
                   </div>
                 )}
               </Draggable>

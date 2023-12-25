@@ -14,7 +14,13 @@ import Completed from "../../components/TaskManagement/Completed";
 const TaskManagement = () => {
   const { register, handleSubmit, reset } = useForm();
   const [showForm, setShowForm] = useState(false);
+  const [taskUpdateStates, setTaskUpdateStates] = useState({});
   const [tasks, setTasks] = useState([]);
+  const [updateFormOpen, setUpdateFormOpen] = useState(false);
+  const [todoUpdateFormOpen, setTodoUpdateFormOpen] = useState(false);
+  const [onGoingUpdateFormOpen, setOnGoingUpdateFormOpen] = useState(false);
+  const [completedUpdateFormOpen, setCompletedUpdateFormOpen] = useState(false);
+
   const axiosSecure = useAxiosSecure();
 
   const { data: addedTasks = [], refetch } = useQuery({
@@ -82,6 +88,29 @@ const TaskManagement = () => {
     });
   };
 
+  const handleTaskUpdate = async (taskId, taskInfo) => {
+    try {
+      const response = await axiosSecure.patch(
+        `/updateTasks/${taskId}`,
+        taskInfo
+      );
+      console.log(response.data);
+      if (response.data.modifiedCount) {
+        refetch();
+        setUpdateFormOpen(false);
+        toast.success("Task updates successful!");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleEditTask = taskId => {
+    setTaskUpdateStates(prevState => ({
+      ...prevState,
+      [taskId]: !prevState[taskId],
+    }));
+  };
+  console.log(updateFormOpen);
   const updateTaskStatusMutation = useMutation({
     mutationFn: ({ taskId, newStatus }) => {
       // Update task status via your API
@@ -198,15 +227,35 @@ const TaskManagement = () => {
         </div>
 
         <div className='grid grid-cols-1 md:grid-cols-3 my-10 px-2 gap-5 overflow-hidden'>
-          <div className=''>
-            <Todo tasks={tasks} handleTaskDelete={handleTaskDelete} />
-          </div>
-          <div className=''>
-            <OnGoing tasks={tasks} handleTaskDelete={handleTaskDelete} />
-          </div>
-          <div className=''>
-            <Completed tasks={tasks} handleTaskDelete={handleTaskDelete} />
-          </div>
+          <Todo
+            updateFormOpen={todoUpdateFormOpen}
+            setUpdateFormOpen={setTodoUpdateFormOpen}
+            tasks={tasks}
+            showUpdate={taskUpdateStates}
+            handleEditTask={handleEditTask}
+            handleTaskDelete={handleTaskDelete}
+            handleTaskUpdate={handleTaskUpdate}
+          />
+
+          <OnGoing
+            updateFormOpen={onGoingUpdateFormOpen}
+            setUpdateFormOpen={setOnGoingUpdateFormOpen}
+            tasks={tasks}
+            showUpdate={taskUpdateStates}
+            handleEditTask={handleEditTask}
+            handleTaskDelete={handleTaskDelete}
+            handleTaskUpdate={handleTaskUpdate}
+          />
+
+          <Completed
+            updateFormOpen={completedUpdateFormOpen}
+            setUpdateFormOpen={setCompletedUpdateFormOpen}
+            tasks={tasks}
+            showUpdate={taskUpdateStates}
+            handleEditTask={handleEditTask}
+            handleTaskDelete={handleTaskDelete}
+            handleTaskUpdate={handleTaskUpdate}
+          />
         </div>
       </DragDropContext>
     </Container>

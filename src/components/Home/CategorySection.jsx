@@ -49,7 +49,7 @@ const CategorySection = () => {
   // console.log(selectedTabIndex);
   return (
     <>
-      <h2 className='text-black h-20 flex items-center text-center justify-center text-2xl md:text-3xl font-bold bg-gradient-to-l from-sky-400 via-white to-blue-500 mb-10 md:mb-24'>
+      <h2 className='text-black h-28 flex items-center text-center justify-center text-2xl md:text-4xl font-bold bg-gradient-to-l from-sky-300 via-white to-blue-700 mb-10'>
         Organize Daily Tasks With Us.
       </h2>
       <Container>
@@ -62,12 +62,12 @@ const CategorySection = () => {
               <Tab
                 key={index}
                 onClick={() => setSelectedTabIndex(index)}
-                className={`cursor-pointer xl:text-2xl relative ${
+                className={`cursor-pointer xl:text-2xl relative text-white/60 ${
                   index === selectedTabIndex &&
-                  "after:w-[100%]  after:h-[4px] md:after:h-[10px]  after:bottom-0 after:bg-blue-800 after:transition-all after:duration-300"
+                  "after:w-[100%]  after:h-[3px] md:after:h-[10px] after:-bottom-2 after:bg-blue-700 after:transition-all after:duration-300"
                 }cursor-pointer relative after:w-16 after:h-[3px] after:bg-white after:absolute after:-bottom-1 after:left-0`}
               >
-                <div className='text-black bg-gradient-to-l from-sky-400 via-white to-blue-500'>
+                <div className='bg-gradient-to-l from-sky-600 via-white/40 to-blue-700'>
                   <p className='cursor-pointer text-sm md:text-xl font-bold uppercase px-2 py-1 md:px-6 md:py-3'>
                     {category.title}
                   </p>
@@ -76,10 +76,10 @@ const CategorySection = () => {
             ))}
           </TabList>
 
-          <div className='px-2'>
+          <div className='px-2 py-10'>
             {categories.map((category, index) => (
               <TabPanel key={index}>
-                <ul className='flex flex-col px-2 py-5  border border-blue-300 overflow-hidden md:p-10 my-5 text-white rounded-2xl'>
+                <ul className='flex flex-col px-2  border border-blue-300 overflow-hidden md:p-10 my-5 text-white rounded-2xl'>
                   {category.useCases.map((useCase, idx) => (
                     <div key={idx} className='flex items-center gap-x-2'>
                       <CiBookmarkCheck className='text-2xl' />

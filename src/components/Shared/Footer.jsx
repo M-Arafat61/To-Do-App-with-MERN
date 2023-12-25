@@ -2,8 +2,8 @@ import Container from "./Container";
 const Footer = () => {
   return (
     <Container>
-      <hr className='my-5  mx-auto border-1 border-gray-600' />
-      <div className='flex flex-col justify-around items-center gap-5 md:flex-row mt-10 md:mt-24'>
+      <hr className='mt-10 md:mt-24  mx-auto border-1 border-gray-600' />
+      <div className='py-2 flex flex-col justify-around items-center gap-5 md:flex-row '>
         <div className='space-y-3'>
           <div className='flex gap-5'>
             <a>
