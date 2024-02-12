@@ -33,6 +33,7 @@ const SocialLogin = () => {
   return (
     <div>
       <button
+        type='button'
         onClick={handleGoogleSignIn}
         className='btn btn-outline bg-[#2111ff] text-white w-full rounded-md overflow-hidden text-xs sm:text-lg font-bold'
       >

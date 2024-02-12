@@ -4,6 +4,7 @@ import useAuth from "../../hooks/useAuth";
 import SocialLogin from "../../components/Shared/SocialLogin";
 import toast from "react-hot-toast";
 import { axiosPublic } from "../../hooks/useAxiosPublic";
+import { useEffect } from "react";
 
 const Register = () => {
   const {
@@ -13,10 +14,16 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const { createUser, updateUserProfile } = useAuth();
+  const { user, createUser, updateUserProfile } = useAuth();
+
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+  useEffect(() => {
+    if (user?.email) {
+      return navigate("/");
+    }
+  }, [user?.email, navigate]);
 
   const onSubmit = data => {
     createUser(data.email, data.password)
@@ -61,7 +68,6 @@ const Register = () => {
           <div className=''>
             <input
               type='text'
-              autoFocus
               {...register("name", { required: true })}
               placeholder='Full name'
               className='input text-xs sm:text-base text-white border border-gray-300 px-3 py-2 outline-none'

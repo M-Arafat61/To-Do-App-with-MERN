@@ -7,7 +7,7 @@ const Banner = () => {
   return (
     <Container>
       <div className='my-10 px-2 md:my-24 flex items-center'>
-        <div className='relative items-center flex mx-auto w-full md:w-3/4 rounded-xl overflow-hidden'>
+        <div className='relative items-center flex mx-auto w-full md:w-3/4 rounded-xl '>
           <img src={banner} alt='' />
           <Link
             to='/dashboard/task-management'

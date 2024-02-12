@@ -12,7 +12,12 @@ import OnGoing from "../../components/TaskManagement/OnGoing";
 import Completed from "../../components/TaskManagement/Completed";
 
 const TaskManagement = () => {
-  const { register, handleSubmit, reset } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
   const [showForm, setShowForm] = useState(false);
   const [taskUpdateStates, setTaskUpdateStates] = useState({});
   const [tasks, setTasks] = useState([]);
@@ -153,9 +158,9 @@ const TaskManagement = () => {
   };
   // console.log(addedTasks);
   const priorityOptions = [
-    { label: "Basic", value: "basic" },
-    { label: "Standard", value: "standard" },
-    { label: "Urgent", value: "urgent" },
+    { label: "Low", value: "low" },
+    { label: "Medium", value: "medium" },
+    { label: "High", value: "high" },
   ];
 
   return (
@@ -180,27 +185,49 @@ const TaskManagement = () => {
             >
               <div className=''>
                 <input
-                  {...register("title", { required: true })}
+                  {...register("title", { required: "Title is required" })}
                   placeholder='Title'
                   className='w-full rounded-md px-3 py-2  focus:outline-none'
                 />
+                {errors.title && (
+                  <p className='text-red-500' role='alert'>
+                    {errors.title.message}
+                  </p>
+                )}
               </div>
               <textarea
-                {...register("description", { required: true })}
+                {...register("description", {
+                  required: "Description is required",
+                })}
                 placeholder='Description'
                 className='w-full rounded-md px-3 py-2  focus:outline-none'
               />
+              {errors.description && (
+                <p className='text-red-500' role='alert'>
+                  {errors.description.message}
+                </p>
+              )}
               <div className='flex gap-x-5'>
-                <select
-                  {...register("priority", { required: true })}
-                  className='rounded-md px-3 py-2 focus:outline-none '
-                >
-                  {priorityOptions.map((option, index) => (
-                    <option key={index} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
+                <div>
+                  <select
+                    {...register("priority", {
+                      required: "Priority is required",
+                    })}
+                    className='rounded-md px-3 py-2 focus:outline-none '
+                  >
+                    <option value=''>Priority</option>
+                    {priorityOptions.map((option, index) => (
+                      <option key={index} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.priority && (
+                    <p className='text-red-500 block' role='alert'>
+                      {errors.priority.message}
+                    </p>
+                  )}
+                </div>
                 <input
                   {...register("deadline", { required: true })}
                   type='date'

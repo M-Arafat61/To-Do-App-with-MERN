@@ -26,7 +26,7 @@ const LeftSidebar = () => {
           </div>
           <hr className='my-2 border-1 border-blue-600/25' />
           <Link
-            className='rounded-r-full flex items-center gap-x-2 px-5 py-2 text-xl hover:bg-blue-700/50 text-white/80  font-medium'
+            className='rounded-r-full flex items-center gap-x-2 px-5 py-2 text-base md:text-xl hover:bg-blue-700/50 text-white/80  font-medium'
             to={"/"}
           >
             <GiTreeRoots />
@@ -35,7 +35,7 @@ const LeftSidebar = () => {
           {!openInfo ? (
             <button
               onClick={() => setOpenInfo(true)}
-              className='rounded-r-full mb-2 w-full flex items-center gap-x-2 px-5 py-2 text-xl hover:bg-blue-700/50 text-white/80  font-medium'
+              className='rounded-r-full mb-2 w-full flex items-center gap-x-2 px-5 py-2 text-base md:text-xl hover:bg-blue-700/50 text-white/80  font-medium'
             >
               <FaUserAstronaut />
               User Details
@@ -51,16 +51,16 @@ const LeftSidebar = () => {
           )}
           {openInfo && (
             <div className='py-2 px-2 mx-auto text-white/60 shadow-lg'>
-              <div className='md:flex items-center gap-x-2'>
-                <p>Name-</p>
+              <div className='lg:flex items-center gap-x-2'>
+                <p className='font-bold'>Name:</p>
                 <h3>{user.displayName}</h3>
               </div>
-              <div className='md:flex items-center gap-x-2'>
-                <p>Email-</p>
+              <div className='lg:flex items-center gap-x-2'>
+                <p className='font-bold'>Email:</p>
                 <h3>{user.email}</h3>
               </div>
               <div className=''>
-                <p>User Since-</p>
+                <p className='font-bold'>User Since:</p>
                 <h3>{formattedDate}</h3>
               </div>
             </div>

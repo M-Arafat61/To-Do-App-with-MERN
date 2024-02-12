@@ -22,6 +22,7 @@ const Todo = ({
     setTaskIdBeingEdited(taskId);
     handleEditTask(taskId);
   };
+  console.log(tasks);
   return (
     <Droppable droppableId='to-do'>
       {provided => (

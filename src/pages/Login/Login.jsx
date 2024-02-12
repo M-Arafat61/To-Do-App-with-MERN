@@ -1,5 +1,4 @@
 import { useForm } from "react-hook-form";
-import Container from "../../components/Shared/Container";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
@@ -37,7 +36,7 @@ const Login = () => {
       });
   };
   return (
-    <div className='container mx-auto my-10 md:my-14 px-3 '>
+    <div className='container mx-auto my-12 md:my-24 px-5 '>
       <div className='w-full mx-auto lg:w-3/4 border rounded-2xl overflow-hidden md:px-12 lg:px-20 py-10 md:py-12 lg:py-14  space-y-6'>
         <div className='text-center'>
           <h1 className='text-2xl md:text-3xl font-semibold mb-5 text-white'>

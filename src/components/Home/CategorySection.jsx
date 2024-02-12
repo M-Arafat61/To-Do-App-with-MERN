@@ -4,6 +4,7 @@ import { CiBookmarkCheck } from "react-icons/ci";
 import Container from "../Shared/Container";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+
 const CategorySection = () => {
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
   const categories = [
@@ -46,7 +47,6 @@ const CategorySection = () => {
       ],
     },
   ];
-  // console.log(selectedTabIndex);
   return (
     <>
       <h2 className='text-black h-28 flex items-center text-center justify-center text-2xl md:text-4xl font-bold bg-gradient-to-l from-sky-300 via-white to-blue-700 mb-10'>
@@ -54,23 +54,24 @@ const CategorySection = () => {
       </h2>
       <Container>
         <Tabs
+          focusTabOnClick={false}
           selectedIndex={selectedTabIndex}
           onSelect={index => setSelectedTabIndex(index)}
         >
-          <TabList className='flex px-2 justify-center gap-5 flex-wrap'>
+          <TabList className='flex flex-wrap px-2 justify-center gap-5'>
             {categories.map((category, index) => (
               <Tab
                 key={index}
-                onClick={() => setSelectedTabIndex(index)}
-                className={`cursor-pointer xl:text-2xl relative text-white/60 ${
-                  index === selectedTabIndex &&
-                  "after:w-[100%]  after:h-[3px] md:after:h-[10px] after:-bottom-2 after:bg-blue-800 after:transition-all after:duration-300"
-                }cursor-pointer relative after:w-16 after:h-[3px] after:bg-white after:absolute after:-bottom-1 after:left-0`}
+                className='cursor-pointer bg-white py-3 px-4 border-b border-white border-opacity-30'
+                style={{
+                  borderBottom:
+                    index === selectedTabIndex
+                      ? "2px solid #3490dc"
+                      : "2px solid transparent",
+                }}
               >
-                <div className='bg-gradient-to-l from-sky-600 via-white/40 to-blue-700'>
-                  <p className='cursor-pointer text-sm md:text-xl font-bold uppercase px-2 py-1 md:px-6 md:py-3'>
-                    {category.title}
-                  </p>
+                <div>
+                  <p className='font-bold uppercase'>{category.title}</p>
                 </div>
               </Tab>
             ))}
@@ -79,7 +80,7 @@ const CategorySection = () => {
           <div className='px-2 py-10'>
             {categories.map((category, index) => (
               <TabPanel key={index}>
-                <ul className='flex flex-col px-2  border border-blue-300 overflow-hidden md:p-10 my-5 text-white rounded-2xl'>
+                <ul className='flex flex-col px-2 border border-blue-300 overflow-hidden md:p-10 my-5 text-white rounded-2xl'>
                   {category.useCases.map((useCase, idx) => (
                     <div key={idx} className='flex items-center gap-x-2'>
                       <CiBookmarkCheck className='text-2xl' />
