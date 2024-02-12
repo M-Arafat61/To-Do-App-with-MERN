@@ -235,7 +235,7 @@ const TaskManagement = () => {
                 />
               </div>
 
-              <div className='flex gap-x-5'>
+              <div className='flex gap-x-5 gap-y-2 md:gap-y-0'>
                 <button
                   onClick={() => setShowForm(false)}
                   className='w-full bg-white/60 text-black font-semibold px-5 py-1 rounded-full'

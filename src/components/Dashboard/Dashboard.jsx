@@ -8,7 +8,7 @@ const Dashboard = () => {
         Create and Manage Tasks.
       </h2>
       <div className='flex justify-between'>
-        <div className='w-1/4 bg-cyan-400/30 h-max min-h-screen'>
+        <div className='w-1/4 bg-cyan-400/30 '>
           <LeftSidebar />
         </div>
         <div className='w-3/4 bg-blue-500/30 h-max min-h-screen pl-2 md:pl-8'>

@@ -26,7 +26,7 @@ const LeftSidebar = () => {
           </div>
           <hr className='my-2 border-1 border-blue-600/25' />
           <Link
-            className='rounded-r-full flex items-center gap-x-2 px-5 py-2 text-base md:text-xl hover:bg-blue-700/50 text-white/80  font-medium'
+            className='rounded-r-full flex items-center gap-x-2 md:px-5 py-2 text-xs md:text-xl hover:bg-blue-700/50 text-white/80  font-medium'
             to={"/"}
           >
             <GiTreeRoots />
@@ -35,7 +35,7 @@ const LeftSidebar = () => {
           {!openInfo ? (
             <button
               onClick={() => setOpenInfo(true)}
-              className='rounded-r-full mb-2 w-full flex items-center gap-x-2 px-5 py-2 text-base md:text-xl hover:bg-blue-700/50 text-white/80  font-medium'
+              className='rounded-r-full mb-2 w-full flex items-center gap-x-2 md:px-5 py-2 text-xs md:text-xl hover:bg-blue-700/50 text-white/80  font-medium'
             >
               <FaUserAstronaut />
               User Details
