@@ -6,10 +6,11 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Todo from "../../components/TaskManagement/Todo";
 import OnGoing from "../../components/TaskManagement/OnGoing";
 import Completed from "../../components/TaskManagement/Completed";
+import TaskCounter from "../../components/TaskManagement/TaskCounter";
 
 const TaskManagement = () => {
   const {
@@ -171,7 +172,6 @@ const TaskManagement = () => {
   };
   const filteredTasks = tasksFilter(tasks, search);
 
-  // console.log(search);
   return (
     <Container>
       <DragDropContext onDragEnd={onDragEnd}>
@@ -270,7 +270,7 @@ const TaskManagement = () => {
             </form>
           )}
         </div>
-
+        <TaskCounter tasks={tasks} />
         <div className='grid grid-cols-1 md:grid-cols-3 my-10 px-2 gap-5 overflow-hidden'>
           <Todo
             updateFormOpen={todoUpdateFormOpen}
