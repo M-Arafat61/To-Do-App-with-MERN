@@ -1,5 +1,5 @@
 import useAuth from "../../hooks/useAuth";
-import { FaGoogle } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 import { axiosPublic } from "../../hooks/useAxiosPublic";
 import { useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -34,10 +34,9 @@ const SocialLogin = () => {
     <div>
       <button
         onClick={handleGoogleSignIn}
-        className='gap-x-2 border p-1 border-black rounded-full flex justify-center items-center w-full'
+        className='btn btn-outline bg-[#2111ff] text-white w-full rounded-md overflow-hidden text-xs sm:text-lg font-bold'
       >
-        <FaGoogle className='text-xl' />
-        <p>Google</p>
+        <FcGoogle className='text-xl' /> Continue with Google
       </button>
     </div>
   );
