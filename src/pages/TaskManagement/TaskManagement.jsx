@@ -26,6 +26,8 @@ const TaskManagement = () => {
   const [onGoingUpdateFormOpen, setOnGoingUpdateFormOpen] = useState(false);
   const [completedUpdateFormOpen, setCompletedUpdateFormOpen] = useState(false);
 
+  const [search, setSearch] = useState("");
+
   const axiosSecure = useAxiosSecure();
 
   const { data: addedTasks = [], refetch } = useQuery({
@@ -162,14 +164,29 @@ const TaskManagement = () => {
     { label: "Medium", value: "medium" },
     { label: "High", value: "high" },
   ];
+  const tasksFilter = (tasks, priority) => {
+    return tasks.filter(task =>
+      task.priority.toLowerCase().includes(priority.toLowerCase())
+    );
+  };
+  const filteredTasks = tasksFilter(tasks, search);
 
+  // console.log(search);
   return (
     <Container>
       <DragDropContext onDragEnd={onDragEnd}>
-        <div className='flex justify-center md:mt-5'>
+        <div className='px-2 md:flex space-y-5 md:space-y-0 space-x-0 md:space-x-5 items-center justify-center mt-5'>
+          <input
+            type='search'
+            value={search}
+            autoFocus
+            placeholder='Search by priority'
+            onChange={e => setSearch(e.target.value)}
+            className='w-1/2 px-3 py-3  outline-none bg-transparent border overflow-hidden border-white/55 text-white'
+          />
           {!showForm && (
             <button
-              className='flex items-center gap-x-2 px-5 py-2 text-xl bg-blue-500/30 text-white/80 font-medium'
+              className='flex items-center gap-x-2 px-6 py-4 text-xl bg-blue-500/30 text-white/80 font-medium'
               onClick={() => setShowForm(true)}
             >
               New Task
@@ -177,11 +194,12 @@ const TaskManagement = () => {
             </button>
           )}
         </div>
+
         <div className='w-3/4 mx-auto flex flex-col items-center'>
           {showForm && (
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className='space-y-2  w-full'
+              className='space-y-2 mt-5 w-full'
             >
               <div className=''>
                 <input
@@ -257,7 +275,8 @@ const TaskManagement = () => {
           <Todo
             updateFormOpen={todoUpdateFormOpen}
             setUpdateFormOpen={setTodoUpdateFormOpen}
-            tasks={tasks}
+            // tasks={tasks}
+            tasks={filteredTasks}
             showUpdate={taskUpdateStates}
             handleEditTask={handleEditTask}
             handleTaskDelete={handleTaskDelete}
@@ -267,7 +286,8 @@ const TaskManagement = () => {
           <OnGoing
             updateFormOpen={onGoingUpdateFormOpen}
             setUpdateFormOpen={setOnGoingUpdateFormOpen}
-            tasks={tasks}
+            // tasks={tasks}
+            tasks={filteredTasks}
             showUpdate={taskUpdateStates}
             handleEditTask={handleEditTask}
             handleTaskDelete={handleTaskDelete}
@@ -277,7 +297,8 @@ const TaskManagement = () => {
           <Completed
             updateFormOpen={completedUpdateFormOpen}
             setUpdateFormOpen={setCompletedUpdateFormOpen}
-            tasks={tasks}
+            // tasks={tasks}
+            tasks={filteredTasks}
             showUpdate={taskUpdateStates}
             handleEditTask={handleEditTask}
             handleTaskDelete={handleTaskDelete}

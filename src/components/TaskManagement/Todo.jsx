@@ -49,11 +49,11 @@ const Todo = ({
                     ref={provided.innerRef}
                   >
                     <div>
-                      <h3 className='text-lg text-black underline font-medium'>
+                      <h3 className='text-lg text-black/90 underline font-bold'>
                         {task.title}
                       </h3>
-                      <p className='text-xs text-white'>{task.description}</p>
-                      <p className='text-sm text-white'>
+                      <p className='text-xs text-black'>{task.description}</p>
+                      <p className='text-sm text-black font-semibold'>
                         Priority: {task.priority}
                       </p>
                       <p className='text-xs text-white'>
