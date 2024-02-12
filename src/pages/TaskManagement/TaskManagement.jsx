@@ -6,7 +6,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Todo from "../../components/TaskManagement/Todo";
 import OnGoing from "../../components/TaskManagement/OnGoing";
 import Completed from "../../components/TaskManagement/Completed";
@@ -175,24 +175,29 @@ const TaskManagement = () => {
   return (
     <Container>
       <DragDropContext onDragEnd={onDragEnd}>
-        <div className='px-2 md:flex space-y-5 md:space-y-0 space-x-0 md:space-x-5 items-center justify-center mt-5'>
-          <input
-            type='search'
-            value={search}
-            autoFocus
-            placeholder='Search by priority'
-            onChange={e => setSearch(e.target.value)}
-            className='w-1/2 px-3 py-3  outline-none bg-transparent border overflow-hidden border-white/55 text-white'
-          />
-          {!showForm && (
-            <button
-              className='flex items-center gap-x-2 px-6 py-4 text-xl bg-blue-500/30 text-white/80 font-medium'
-              onClick={() => setShowForm(true)}
-            >
-              New Task
-              <MdAddCard className='text-2xl' />
-            </button>
-          )}
+        <div className='mx-auto px-2 md:flex space-y-5 md:space-y-0 space-x-0 md:space-x-5 items-center justify-center mt-5'>
+          <div className='w-3/4 md:w-1/2 mx-auto'>
+            <input
+              type='search'
+              value={search}
+              autoFocus
+              placeholder='Search by priority'
+              onChange={e => setSearch(e.target.value)}
+              className='px-3 py-3 w-full outline-none bg-transparent border overflow-hidden border-white/55 text-white'
+            />
+          </div>
+
+          <div className='w-3/4 md:w-1/2 mx-auto'>
+            {!showForm && (
+              <button
+                className='flex items-center gap-x-2 px-6 py-4 text-xl bg-blue-500/30 text-white/80 font-medium'
+                onClick={() => setShowForm(true)}
+              >
+                New Task
+                <MdAddCard className='text-2xl' />
+              </button>
+            )}
+          </div>
         </div>
 
         <div className='w-3/4 mx-auto flex flex-col items-center'>

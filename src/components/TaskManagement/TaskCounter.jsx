@@ -12,7 +12,7 @@ const TaskCounter = ({ tasks }) => {
     setCompletedCount(completedTask);
   }, [tasks]);
 
-  console.log(completedCount);
+  //   console.log(completedCount);
 
   return (
     <div className='mt-10 space-y-2 text-white'>
