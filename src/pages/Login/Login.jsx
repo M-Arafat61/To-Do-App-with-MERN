@@ -4,8 +4,10 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
 import SocialLogin from "../../components/Shared/SocialLogin";
+import { useEffect } from "react";
 
 const Login = () => {
+  const { user } = useAuth();
   const {
     register,
     handleSubmit,
@@ -14,7 +16,11 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
-
+  useEffect(() => {
+    if (user?.email) {
+      return navigate("/");
+    }
+  }, [user?.email, navigate]);
   const { signIn } = useAuth();
   const onSubmit = async data => {
     const email = data.email;

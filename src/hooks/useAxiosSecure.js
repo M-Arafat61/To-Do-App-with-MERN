@@ -4,8 +4,8 @@ import { useEffect } from "react";
 import useAuth from "./useAuth";
 
 const instance = axios.create({
-  // baseURL:"http://localhost:5000",
-  baseURL: "https://task-management-server-coral-chi.vercel.app",
+  baseURL: "http://localhost:5000",
+  // baseURL: "https://task-management-server-coral-chi.vercel.app",
   withCredentials: true,
 });
 

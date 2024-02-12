@@ -49,8 +49,8 @@ const AuthProvider = ({ children }) => {
       const userEmail = currentUser?.email || user?.email;
       const loggedUser = { email: userEmail };
       setUser(currentUser);
-      // console.log("current-user from observer", currentUser?.email);
-      // console.log("current-user from user", user?.email);
+      console.log("current-user from observer", currentUser?.email);
+      console.log("current-user from user", user?.email);
       setLoading(false);
       if (currentUser) {
         const fetchJwt = async () => {

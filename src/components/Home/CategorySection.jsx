@@ -64,7 +64,7 @@ const CategorySection = () => {
                 onClick={() => setSelectedTabIndex(index)}
                 className={`cursor-pointer xl:text-2xl relative text-white/60 ${
                   index === selectedTabIndex &&
-                  "after:w-[100%]  after:h-[3px] md:after:h-[10px] after:-bottom-2 after:bg-blue-700 after:transition-all after:duration-300"
+                  "after:w-[100%]  after:h-[3px] md:after:h-[10px] after:-bottom-2 after:bg-blue-800 after:transition-all after:duration-300"
                 }cursor-pointer relative after:w-16 after:h-[3px] after:bg-white after:absolute after:-bottom-1 after:left-0`}
               >
                 <div className='bg-gradient-to-l from-sky-600 via-white/40 to-blue-700'>
